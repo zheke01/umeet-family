@@ -1,0 +1,11 @@
+{
+  "app": "umeet-family",
+  "kind": "worker",
+  "environment": "production",
+  "homepage": "https://umeet-family.higgsfield.app",
+  "status_path": "/api/status",
+  "health_path": "/api/status",
+  "repo": "https://github.com/zheke01/umeet-family",
+  "owner": "zheke01",
+  "checks": ["http", "database"]
+}

@@ -14,6 +14,7 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FamilyKeyRouteImport } from './routes/family.$key'
+import { Route as ApiStatusRouteImport } from './routes/api.status'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -40,12 +41,18 @@ const FamilyKeyRoute = FamilyKeyRouteImport.update({
   path: '/family/$key',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiStatusRoute = ApiStatusRouteImport.update({
+  id: '/api/status',
+  path: '/api/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/status': typeof ApiStatusRoute
   '/family/$key': typeof FamilyKeyRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/app': typeof AppRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/status': typeof ApiStatusRoute
   '/family/$key': typeof FamilyKeyRoute
 }
 export interface FileRoutesById {
@@ -61,15 +69,34 @@ export interface FileRoutesById {
   '/app': typeof AppRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/status': typeof ApiStatusRoute
   '/family/$key': typeof FamilyKeyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/robots.txt' | '/sitemap.xml' | '/family/$key'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/api/status'
+    | '/family/$key'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app' | '/robots.txt' | '/sitemap.xml' | '/family/$key'
+  to:
+    | '/'
+    | '/app'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/api/status'
+    | '/family/$key'
   id:
-    '__root__' | '/' | '/app' | '/robots.txt' | '/sitemap.xml' | '/family/$key'
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/api/status'
+    | '/family/$key'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +104,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiStatusRoute: typeof ApiStatusRoute
   FamilyKeyRoute: typeof FamilyKeyRoute
 }
 
@@ -117,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FamilyKeyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/status': {
+      id: '/api/status'
+      path: '/api/status'
+      fullPath: '/api/status'
+      preLoaderRoute: typeof ApiStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiStatusRoute: ApiStatusRoute,
   FamilyKeyRoute: FamilyKeyRoute,
 }
 export const routeTree = rootRouteImport
