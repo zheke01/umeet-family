@@ -1,0 +1,129 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@theme {
+  --spacing: 0.25rem;
+  --color-mist: #f4fbf6;
+  --color-forest: #1f3a34;
+  --color-sprout: #4fb874;
+  --color-mint: #b5e8d3;
+  --color-peach: #ffb38a;
+  --color-sun: #ffd966;
+  --color-leaf: #dcebe1;
+  --color-moss: #4a5f59;
+  --font-display: "Fredoka", ui-rounded, "Nunito", system-ui, sans-serif;
+  --font-body: "Nunito", ui-rounded, system-ui, sans-serif;
+}
+
+html {
+  background: var(--color-mist);
+  color: var(--color-forest);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+::selection {
+  background: var(--color-mint);
+}
+
+/* Hero headline build: transform only, fires on mount. */
+@keyframes umeet-rise {
+  from {
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    transform: none;
+  }
+}
+.umeet-rise {
+  animation: umeet-rise 0.9s cubic-bezier(0.2, 0.9, 0.25, 1.15) both;
+}
+.umeet-rise-2 {
+  animation: umeet-rise 0.9s 0.12s cubic-bezier(0.2, 0.9, 0.25, 1.15) both;
+}
+
+/* B2 grade-shift garden: the lit plate is revealed through a moving soft spotlight. */
+.garden-lit {
+  -webkit-mask-image: radial-gradient(
+    var(--grx, 30%) var(--gry, 53%) at var(--gx, 70%) var(--gy, 50%),
+    #000 62%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    var(--grx, 30%) var(--gry, 53%) at var(--gx, 70%) var(--gy, 50%),
+    #000 62%,
+    transparent 100%
+  );
+}
+
+/* Ticket CTA perforation notches. */
+.ticket {
+  -webkit-mask: radial-gradient(circle 9px at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 9px at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
+  mask: radial-gradient(circle 9px at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 9px at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
+}
+
+/* Flip chips (parents section). */
+.flip {
+  perspective: 700px;
+}
+.flip-inner {
+  transition: transform 0.6s cubic-bezier(0.3, 1.4, 0.5, 1);
+  transform-style: preserve-3d;
+}
+.flip[data-sent="true"] .flip-inner {
+  transform: rotateX(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  transform: rotateX(180deg);
+}
+
+/* Wavy underline that draws on hover (nav). */
+.wave-link path {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  transition: stroke-dashoffset 0.5s ease;
+}
+.wave-link:hover path,
+.wave-link:focus-visible path {
+  stroke-dashoffset: 0;
+}
+
+/* Arrow travelling a drawn path (widget CTA). */
+.path-link .path-dot {
+  offset-path: path("M2 14 C 30 2, 50 26, 78 12 S 120 4, 138 14");
+  offset-distance: 0%;
+  transition: offset-distance 0.7s cubic-bezier(0.3, 0.9, 0.3, 1);
+}
+.path-link:hover .path-dot,
+.path-link:focus-visible .path-dot {
+  offset-distance: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .umeet-rise,
+  .umeet-rise-2 {
+    animation: none;
+  }
+  .flip-inner,
+  .wave-link path,
+  .path-link .path-dot {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
